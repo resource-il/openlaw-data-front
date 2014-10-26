@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="he" ng-app="openLaw">
   <head>
     <meta charset="UTF-8">
     <title>OpenLaw Data | Home</title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
   </head>
   <body>
-    
+    <div id="container">
+      <header>
+        <h1>OpenLaw Data</h1>
+        <nav>
+          <ul>
+            <li>
+              <a href="/" title="Main">Main</a>
+            </li>
+            <li>
+              <a href="/bookelt/" title="Booklet">Booklet</a>
+              <ul>
+                <li>
+                  <a href="/booklet/year/" title="Booklets by year">Year</a>
+                </li>
+                <li>
+                  <a href="/booklet/knesset/" title="Booklets by knesset">Knesset</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <section>
+        <div ng-controller="MyController">
+          Hello, {{greetMe}}!
+        </div>
+        <div ng-controller="bookletList">
+          <ul>
+            <li ng-repeat="booklet in booklets">
+              <span class="title">{{booklet.booklet}}</span>
+              <a href="{{booklet.links.justice_pdf}}">{{booklet.links.justice_pdf}}</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <script src="vendor/jquery/js/jquery-2.1.1.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/angularjs/js/angular.min.js"></script>
+    <script src="js/openlaw.js"></script>
   </body>
 </html>
