@@ -1,99 +1,96 @@
 <!DOCTYPE html>
 <html lang="he" ng-app="openLaw">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>OpenLaw Data | Home</title>
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/openlaw.css" rel="stylesheet">
-  </head>
-  <body>
-    <div id="container" calss="container-fluid">
-      <header>
-        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-          <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#">OpenLaw Data</a>
-            </div>
-
-            <div class="collapse navbar-collapse">
-              <ul class="nav navbar-nav">
-                <li>
-                  <a href="#" title="Main">Main</a>
-                </li>
-              </ul>
-            </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>OpenLaw Data | Home</title>
+  <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+  <!--<link href="vendor/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">-->
+  <link rel="stylesheet/less" type="text/css" href="css/local.less"/>
+  <!--<link href="css/openlaw.css" rel="stylesheet">-->
+  <!-- set options before less.js script -->
+  <script>
+    less = {
+      env: "development",
+      async: false,
+      fileAsync: false,
+      poll: 1000,
+      functions: {},
+      dumpLineNumbers: "comments",
+      relativeUrls: false,
+      rootpath: ":/a.com/"
+    };
+  </script>
+  <script src="vendor/less/js/less-1.7.0.min.js"></script>
+  <script src="vendor/modernizr/js/modernizr.js"></script>
+</head>
+<body>
+<div id="container" class="common-structure">
+  <header class="main-header">
+    HEADER
+    <h1>Open Law - Data</h1>
+  </header>
+  <div class="main-area">
+    <nav class="main-nav">
+      <div class="box-list" id="selector" ng-controller="selector">
+          <div class="box open select-knesset">
+              <div class="wrapper">
+                <header><a href="#">Select Knesset</a></header>
+                <div class="content">
+                  <ul class="">
+                    <li ng-repeat="knesset in knessetList">
+                      <a href="#/booklet/knesset/{{knesset}}">Knesset
+                        {{knesset}}</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
           </div>
-        </nav>
-      </header>
-      <section id="main-content" class="row">
-        <aside class="col-lg-3">
-          <div ng-controller="selector">
-            <ul class="nav nav-stacked panel-group" id="selector" role="tablist" aria-multiselectable="true">
-              <li class="select-knesset panel panel-default">
-                <div class="panel-heading" role="tab" id="headingKnessetSelector">
-                  <div class="panel-title">
-                    <a data-toggle="collapse" data-parent="#selector" href="#collapseKnessetSelector" aria-controls="collapseKnessetSelector">Select Knesset</a>
-                  </div>
-                </div>
-                <ul id="collapseKnessetSelector" class="panel-collapse collapse nav nav-list in" role="tabpanel" aria-labelledby="headingKnessetSelector">
-                  <li ng-repeat="knesset in knessetList">
-                    <a href="#booklet/knesset/{{knesset}}" data-selection="knesset/{{knesset}}" ng-click="select($event)">Knesset {{knesset}}</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="select-years panel panel-default">
-                <div class="panel-heading" role="tab" id="headingYearSelector">
-                  <div class="panel-title">
-                    <a data-toggle="collapse" data-parent="#selector" href="#collapseYearSelector" aria-controls="collapseYearSelector">Select Year</a>
-                  </div>
-                </div>
-                <ul id="collapseYearSelector" class="panel-collapse collapse nav nav-list" role="tabpanel" aria-labelledby="headingYearSelector">
+          <div class="box select-year">
+            <div class="wrapper">
+              <header><a href="#">Select Year</a></header>
+              <div class="content">
+                <ul class="">
                   <li ng-repeat="year in years">
-                    <a href="#booklet/year/{{year}}" data-selection="year/{{year}}" ng-click="select($event)">{{year}}</a>
+                    <a href="#/booklet/year/{{year}}">{{year}}</a>
                   </li>
                 </ul>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
-        </aside>
+        </div>
+    </nav>
+    <main id="main-content" class="main-content">
+      MAIN
+      <div ng-controller="bookletList">
+        <ul class="">
+          <li ng-repeat="booklet in booklets" class="">
 
-        <section class="col-lg-9">
-          <div ng-controller="bookletList">
-            <ul class="panel-group nav nav-stacked" id="lawAccordion" role="tablist" aria-multiselectable="true">
-              <li ng-repeat="booklet in booklets" class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading{{booklet.booklet}}">
-                  <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#lawAccordion" href="#collapse{{booklet.booklet}}" aria-controls="collapse{{booklet.booklet}}">{{booklet.booklet}}</a>
-                    <span class="published"><i class="glyphicon glyphicon-calendar" title="Published"></i> <time datetime="{{booklet.dates.published}}">{{booklet.dates.published}}</time></span>
-                  </h4>
-                </div>
-                <div id="collapse{{booklet.booklet}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{booklet.booklet}}">
-                  <div class="panel-body">
-                    <ul>
-                      <li ng-repeat="link in booklet.links">
-                        <a href="{{link}}" target="_blank">{{link}}</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </section>
-      </section>
-    </div>
-    <script src="vendor/jquery/js/jquery-2.1.1.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="vendor/angularjs/js/angular.min.js"></script>
-    <script src="js/openlaw.js"></script>
-  </body>
+            <article id="content_{{booklet.booklet}}" class="">
+              <header>
+                <h3 href="#content_{{booklet.booklet}}">{{booklet.booklet}}</h3>
+                <footer class="published">
+                  Published
+                  <time datetime="{{booklet.dates.published}}">{{booklet.dates.published}}</time>
+                </footer>
+              </header>
+              <div class="content">
+                <ul>
+                  <li ng-repeat="link in booklet.links">
+                    <a href="{{link}}" target="_blank">{{link}}</a>
+                  </li>
+                </ul>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </div>
+</div>
+<script src="vendor/jquery/js/jquery-2.1.1.min.js"></script>
+<!--<script src="vendor/bootstrap/js/bootstrap.min.js"></script>-->
+<script src="vendor/angularjs/js/angular.min.js"></script>
+<script src="js/openlaw.js"></script>
+</body>
 </html>

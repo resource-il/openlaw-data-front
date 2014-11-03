@@ -1,0 +1,70 @@
+/**************************
+***************************
+
+@subpackage	Main 
+@author Elad Shechter
+@category CSS 
+@copyright	WRITE HERE
+
+***************************
+**************************/
+
+/**********Imports*********/
+/*configuration*/
+@import "config.less";
+@import "config/devices.less"; /*Global Responsive design breakpoints*/
+
+/*resets*/
+@import "general/normalize.less";
+@import "general/normalize.local.less";
+@import "general/typography.less";
+
+/*fonts*/
+/*@import "fonts/font-almoni.less";*/
+
+/*common*/
+@import "general/mixings.less";
+/*icons and font-icons*/
+
+/*layout*/
+@import "commons/grid.less";
+/*@import "commons/layout.less";
+@import "commons/grids.less";
+@import "commons/forms.less";
+@import "commons/print.less";*/
+
+/*components*/
+@import "components/box.less";
+/*@import "component/header.less";
+@import "component/footer.less";*/
+
+/*sequences*/
+
+/*social*/
+
+/*pages*/
+
+
+
+/*CODE EXAMPLE - for component header  + include responsive*/
+
+        .main-header{
+            /*base styles - all devices*/
+
+            /*responsive breakpoints for component*/
+            @media @break1{
+                /*mobile only (from 0px up top 570px)*/
+	        }
+		
+	        @media @break2{	
+            		/*tablet only (from 571px up top 1002px)*/
+	        }
+            @media @break3{
+                /*desktop only (from 1003px up infinite)*/
+            }
+	        @media @break2, @break3{
+                /*tablet & desktop (from 571px up infinite)*/
+            }
+        }
+
+

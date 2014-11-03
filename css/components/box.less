@@ -1,0 +1,17 @@
+.box-list{
+  flex:1; flex-direction:column; display:flex;
+}
+
+.box{
+  background-color:@white;
+  header{background-color:@header-bg-color; padding:3px; border-radius:3px; color:@white; font-weight:bold; font-size:11rem; }
+  .wrapper{overflow:auto;}
+  .content{display:none;}
+  &.open{
+    flex:1;
+    .content{display:block;}
+  }
+  &:not(:first-child){margin-top:10px;}
+
+  li{line-height:30px;}
+}

@@ -1,0 +1,72 @@
+﻿.trim{text-overflow:ellipsis; white-space:nowrap; overflow:hidden; display:block;}
+.trim-table{text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
+.remove-trim{white-space:normal; overflow:visible;}
+
+/*opacity function*/
+.opacity (@opacity) {
+	@opacityPercentage: @opacity * 100;
+	opacity: @opacity;
+	filter: ~"alpha(opacity=@{opacityPercentage})";
+}
+
+/*Transform function*/
+.transform(@transform){
+	-ms-transform:@transform;
+	-moz-transform: @transform; /* Firefox 4 */
+	-webkit-transform: @transform; /* Safari and Chrome */
+	-o-transform: @transform; /* Opera */
+	transform: @transform;
+}
+
+/*Rotate Transform function*/
+.rotation(@deg:5deg){
+	.transform(rotate(@deg));
+}
+
+/*Transition function*/
+.transition(@transition){
+	-moz-transition: @transition; /* Firefox 4 */
+	-webkit-transition: @transition; /* Safari and Chrome */
+	-o-transition: @transition; /* Opera */
+	transition: @transition;
+}
+
+/*gradient - function*/
+.gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF) {
+	background: @color;
+	background: -webkit-gradient(linear, left bottom, left top, color-stop(0, @start), color-stop(1, @stop));
+	background: -ms-linear-gradient(bottom, @start, @stop);
+	background: -moz-linear-gradient(center bottom, @start 0%, @stop 100%);
+	background: -o-linear-gradient(@stop,@start);
+	background: linear-gradient(to bottom, @start 0%,@stop 100%); /* W3C */
+	filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
+}
+
+.filter(@var){
+	-moz-filter:@var;
+	-webkit-filter:@var;
+	filter:@var;
+}
+
+.button-reset(){
+	background-color:transparent;
+	border-width:0;
+}
+
+.prevent-select(){
+	-webkit-tap-highlight-color:rgba(0,0,0,0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	outline-style:none;
+}
+
+.backface-visibility(@value:hidden){
+	-webkit-backface-visibility:@value; /* Chrome and Safari */
+	-moz-backface-visibility:@value; /* Firefox */
+	-ms-backface-visibility:@value; /* Internet Explorer */
+	backface-visibility:@value;
+}

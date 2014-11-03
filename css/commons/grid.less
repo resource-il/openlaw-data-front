@@ -1,0 +1,14 @@
+html,body{height:100%;}
+.common-structure{
+  @sep-width-border:1px;
+  height:100%;
+  display:flex; flex-direction:column;
+
+  .main-header{position:relative; border-bottom:solid @sep-width-border @gray-w; box-shadow:0 0 3px 3px @gray-w;}
+
+  .main-area{
+    display:flex; flex-direction:row; flex:1;
+    .main-nav{display:flex; flex-basis:150px; padding:5px; overflow-y:auto; border-left:solid @sep-width-border @gray-w; background-color:@gray-z;}
+    .main-content{flex:1;}
+  }
+}

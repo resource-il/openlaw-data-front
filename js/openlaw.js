@@ -1,4 +1,4 @@
-angular.module('openLaw', [])
+var openLawApp = angular.module('openLaw', [])
     .controller('selector', function ($scope) {
         $scope.years = [];
         startYear = 2005;
@@ -10,14 +10,28 @@ angular.module('openLaw', [])
         for (currentKnesset = 1; currentKnesset <= latestKnesset; currentKnesset++) {
             $scope.knessetList.push(currentKnesset);
         }
-        $scope.select = function(event) {
-            if (event.preventDefault) event.preventDefault();
+        //$scope.select = function (event) {
+            //if (event.preventDefault) event.preventDefault();
             //url = this.href.substr(1);
             //console.log(event.target.getAttribute('href'));
-        };
+        //};
     })
     .controller('bookletList', function ($scope, $http) {
         //$http.jsonp('http://law.resource.org.il/booklet/knesset/12/?callback=JSON_CALLBACK').success(function (data) {
         //    $scope.booklets = data.content;
         //});
     });
+
+openLawApp.config(function ($locationProvider) {
+    // Configure existing providers
+    $locationProvider.html5Mode(true);
+});
+
+(function ($) {
+    $(document).ready(function () {
+        $(".box").on("click", "header", function (event) {
+            $this = $(this);
+            $this.parents(".box").toggleClass('open');
+        });
+    });
+})(jQuery);
