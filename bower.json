@@ -2,7 +2,8 @@
   "name": "openlaw-data-front",
   "version": "0.1.0",
   "authors": [
-    "Yehuda Deutsch <yeh@uda.co.il>"
+    "Yehuda Deutsch <yeh@uda.co.il>",
+      "Elad Sh <elad2412@gmail.com>"
   ],
   "description": "Open Law - Data - JS Front End",
   "main": "index.html",

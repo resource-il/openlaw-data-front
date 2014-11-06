@@ -8,7 +8,9 @@ html,body{height:100%;}
 
   .main-area{
     display:flex; flex-direction:row; flex:1;
-    .main-nav{display:flex; flex-basis:150px; padding:5px; overflow-y:auto; border-left:solid @sep-width-border @gray-w; background-color:@gray-z;}
-    .main-content{flex:1;}
+    .main-nav{
+        display:flex; /*flex-basis:150px;*/ max-width:300px; min-width:180px; padding:5px; overflow-y:auto; border-left:solid @sep-width-border @gray-w; background-color:@gray-z;        
+    }
+    .main-content{flex:1; padding:5px;}
   }
 }

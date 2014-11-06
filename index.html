@@ -15,7 +15,7 @@
       functions: {},
       dumpLineNumbers: "comments",
       relativeUrls: false,
-      rootpath: ":/a.com/"
+      rootpath: ":/localhost/"
     };
   </script>
   <script src="bower_components/less/dist/less-1.7.5.min.js"></script>
@@ -29,33 +29,29 @@
   </header>
   <div class="main-area">
     <nav class="main-nav">
-      <div class="box-list" id="selector" ng-controller="selector">
-          <div class="box open select-knesset">
-              <div class="wrapper">
-                <header><a href="#">Select Knesset</a></header>
-                <div class="content">
-                  <ul class="">
+      <ul class="box-list" id="selector" ng-controller="selector">
+          <li class="box open select-knesset">             
+            <header><a href="#">Select Knesset</a></header>
+            <div class="content">
+                <ul class="">
                     <li ng-repeat="knesset in knessetList">
-                      <a href="#/booklet/knesset/{{knesset}}">Knesset
+                        <a href="#/booklet/knesset/{{knesset}}">Knesset
                         {{knesset}}</a>
                     </li>
-                  </ul>
-                </div>
-              </div>
-          </div>
-          <div class="box select-year">
-            <div class="wrapper">
-              <header><a href="#">Select Year</a></header>
-              <div class="content">
-                <ul class="">
-                  <li ng-repeat="year in years">
-                    <a href="#/booklet/year/{{year}}">{{year}}</a>
-                  </li>
                 </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+            </div>              
+          </li>
+          <li class="box select-year">            
+            <header><a href="#">Select Year</a></header>
+            <div class="content">
+                <ul class="">
+                    <li ng-repeat="year in years">
+                    <a href="#/booklet/year/{{year}}">{{year}}</a>
+                    </li>
+                </ul>
+            </div>            
+          </li>
+        </ul>
     </nav>
     <main id="main-content" class="main-content">
       MAIN
