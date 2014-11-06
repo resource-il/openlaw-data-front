@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "authors": [
     "Yehuda Deutsch <yeh@uda.co.il>",
-      "Elad Sh <elad2412@gmail.com>"
+    "Elad Shechter <elad2412@gmail.com>"
   ],
   "description": "Open Law - Data - JS Front End",
   "main": "index.html",
