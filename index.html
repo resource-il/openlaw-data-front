@@ -24,34 +24,39 @@
 <body>
 <div id="container" class="common-structure">
   <header class="main-header">
-    HEADER
     <h1>Open Law - Data</h1>
+
+    <div id="free-search">
+      <form action="" method="post">
+        <input type="text" name="query" id="free-query">
+        <input type="submit" value="Search">
+      </form>
+    </div>
   </header>
   <div class="main-area">
     <nav class="main-nav">
       <ul class="box-list" id="selector" ng-controller="selector">
-          <li class="box open select-knesset">             
-            <header><a href="#">Select Knesset</a></header>
-            <div class="content">
-                <ul class="">
-                    <li ng-repeat="knesset in knessetList">
-                        <a href="#/booklet/knesset/{{knesset}}">Knesset
-                        {{knesset}}</a>
-                    </li>
-                </ul>
-            </div>              
-          </li>
-          <li class="box select-year">            
-            <header><a href="#">Select Year</a></header>
-            <div class="content">
-                <ul class="">
-                    <li ng-repeat="year in years">
-                    <a href="#/booklet/year/{{year}}">{{year}}</a>
-                    </li>
-                </ul>
-            </div>            
-          </li>
-        </ul>
+        <li class="box open select-knesset">
+          <header><a href="#">Select Knesset</a></header>
+          <div class="content">
+            <ul class="">
+              <li ng-repeat="knesset in knessetList">
+                <a class="select-link" href="#/booklet/knesset/{{knesset}}">Knesset {{knesset}}</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="box select-year">
+          <header><a href="#">Select Year</a></header>
+          <div class="content">
+            <ul class="">
+              <li ng-repeat="year in years">
+                <a class="select-link" href="#/booklet/year/{{year}}">{{year}}</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
     </nav>
     <main id="main-content" class="main-content">
       MAIN
