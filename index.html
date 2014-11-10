@@ -37,7 +37,7 @@
     <nav class="main-nav">
       <ul class="box-list" id="selector" ng-controller="selector">
         <li class="box open select-knesset">
-          <header><a href="#">Select Knesset</a></header>
+          <header class="fc"><h2 class="title">Select Knesset</h2></header>
           <div class="content">
             <ul class="">
               <li ng-repeat="knesset in knessetList">
@@ -47,7 +47,7 @@
           </div>
         </li>
         <li class="box select-year">
-          <header><a href="#">Select Year</a></header>
+          <header><h2 class="title">Select Year</h2></header>
           <div class="content">
             <ul class="">
               <li ng-repeat="year in years">
@@ -59,15 +59,13 @@
       </ul>
     </nav>
     <main id="main-content" class="main-content">
-      MAIN
       <div ng-controller="bookletList">
         <ul class="">
-          <li ng-repeat="booklet in booklets" class="">
-
+          <li ng-repeat="booklet in booklets" class="box">
             <article id="content_{{booklet.booklet}}" class="">
-              <header>
-                <h3 href="#content_{{booklet.booklet}}">{{booklet.booklet}}</h3>
-                <footer class="published">
+              <header class="fc">
+                <h3 class="title">{{booklet.booklet}}</h3>
+                <footer class="header-footer published">
                   Published
                   <time datetime="{{booklet.dates.published}}">{{booklet.dates.published}}</time>
                 </footer>
