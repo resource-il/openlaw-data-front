@@ -30,7 +30,7 @@ openLawApp.config(function ($locationProvider) {
 
 (function ($) {
     $(document).ready(function () {
-        $(".box").on("click", "header", function (event) {
+        $(".box-list, .main-content").on("click", "header", function (event) {
             $this = $(this);
             $this.parents(".box").toggleClass('open');
         });
