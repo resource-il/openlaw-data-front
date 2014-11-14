@@ -1,18 +1,17 @@
 var openLawApp = angular.module('openLaw', ['ngRoute'])
-    .directive('selectLink', function() {
+    .directive('boxHeader', function () {
         return {
-            link: function($scope, $element, $attrs) {
-                $element.on('click', function($event) {
-                    angular.element('.select-link.selected').removeClass('selected');
-                    $element.addClass('selected');
+            link: function ($scope, $element) {
+                $element.on("click", function ($event) {
+                    $element.parents('.box').toggleClass('open');
                 });
             },
             restrict: 'C'
         };
     })
-    .directive('ngDump', function() {
+    .directive('ngDump', function () {
         return {
-            link: function ($scope, $element, $attrs) {
+            link: function ($scope, $element) {
                 $element.html(JSON.stringify($scope.booklet, undefined, 2));
                 //console.log($scope);
             },
@@ -31,11 +30,13 @@ var openLawApp = angular.module('openLaw', ['ngRoute'])
             $scope.knessetList.push(currentKnesset);
         }
     })
-    .controller('bookletList', function ($scope, $routeParams, $http) {
-        //console.log('routeParams', typeof $routeParams);
+    .controller('bookletList', function ($scope, $routeParams, $http, $location) {
         if ($routeParams.selector == undefined || $routeParams.selection == undefined) {
             return;
         }
+
+        angular.element('.select-link.selected').removeClass('selected');
+        angular.element('.select-link[href="' + $location.path() + '"]').addClass('selected');
 
         url = 'http://law.resource.org.il/v0/booklet/:selector/:selection?callback=JSON_CALLBACK'
             .replace(':selector', $routeParams.selector)
@@ -57,12 +58,3 @@ openLawApp.config(function ($routeProvider, $locationProvider) {
             redirectTo: '/booklet/year/' + new Date().getFullYear()
         });
 });
-
-(function ($) {
-    $(document).ready(function () {
-        $(".box-list, .main-content").on("click", "header", function (event) {
-            $this = $(this);
-            $this.parents(".box").toggleClass('open');
-        });
-    });
-})(jQuery);
