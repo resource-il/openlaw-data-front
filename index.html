@@ -2,6 +2,7 @@
 <html lang="he" ng-app="openLaw">
 <head>
   <meta charset="UTF-8">
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>OpenLaw Data | Home</title>
   <link rel="stylesheet/less" type="text/css" href="css/local.less"/>
@@ -35,13 +36,13 @@
   </header>
   <div class="main-area">
     <nav class="main-nav">
-      <ul class="box-list" id="selector" ng-controller="selector">
+      <ul class="box-list open-law-list" id="selector" ng-controller="selector">
         <li class="box open select-knesset">
           <header class="fc"><h2 class="title">Select Knesset</h2></header>
           <div class="content">
             <ul class="">
               <li ng-repeat="knesset in knessetList">
-                <a class="select-link" href="#/booklet/knesset/{{knesset}}">Knesset {{knesset}}</a>
+                <a class="select-link" href="/booklet/knesset/{{knesset}}">Knesset {{knesset}}</a>
               </li>
             </ul>
           </div>
@@ -51,7 +52,7 @@
           <div class="content">
             <ul class="">
               <li ng-repeat="year in years">
-                <a class="select-link" href="#/booklet/year/{{year}}">{{year}}</a>
+                <a class="select-link" href="/booklet/year/{{year}}">{{year}}</a>
               </li>
             </ul>
           </div>
@@ -60,32 +61,15 @@
     </nav>
     <main id="main-content" class="main-content">
       <div ng-controller="bookletList">
-        <ul class="">
-          <li ng-repeat="booklet in booklets" class="box">
-            <article id="content_{{booklet.booklet}}" class="">
-              <header class="fc">
-                <h3 class="title">{{booklet.booklet}}</h3>
-                <footer class="header-footer published">
-                  Published
-                  <time datetime="{{booklet.dates.published}}">{{booklet.dates.published}}</time>
-                </footer>
-              </header>
-              <div class="content">
-                <ul>
-                  <li ng-repeat="link in booklet.links">
-                    <a href="{{link}}" target="_blank">{{link}}</a>
-                  </li>
-                </ul>
-              </div>
-            </article>
-          </li>
-        </ul>
+        <!-- This content comes from booklet-list.html -->
+        <div ng-view></div>
       </div>
     </main>
   </div>
 </div>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angularjs/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
 <script src="js/openlaw.js"></script>
 </body>
 </html>

@@ -1,0 +1,35 @@
+<ul class="">
+  <li ng-repeat="booklet in booklets" class="box">
+    <article id="content_{{booklet.booklet}}" class="">
+      <header class="fc">
+        <h3 class="title">{{booklet.booklet}}</h3>
+        <footer ng-if="booklet.dates.published" class="header-footer published">
+          Published
+          <time datetime="{{booklet.dates.published}}">{{booklet.dates.published}}</time>
+        </footer>
+      </header>
+      <div class="content">
+        <dl>
+
+          <dt>Booklet:</dt>
+          <dd>{{booklet.booklet}}</dd>
+
+          <dt>Knesset:</dt>
+          <dd>{{booklet.knesset}}</dd>
+
+          <dt>Links:</dt>
+          <dd>
+            <ul>
+              <li ng-repeat="(source, link) in booklet.links">{{source}}: <a href="{{link}}" target="_blank">{{link}}</a></li>
+            </ul>
+          </dd>
+
+        </dl>
+        <div class="ng-dump-wrapper">
+          <p>Dump: </p>
+          <pre class="ng-dump"></pre>
+        </div>
+      </div>
+    </article>
+  </li>
+</ul>
