@@ -12,7 +12,7 @@
     "openlaw"
   ],
   "license": "MIT",
-  "homepage": "http://law.resource.org.il/",
+  "homepage": "http://src.openlaw.org.il/",
   "private": true,
   "ignore": [
     "**/.*",
