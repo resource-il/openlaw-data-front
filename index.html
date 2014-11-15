@@ -37,17 +37,17 @@
   <div class="main-area">
     <nav class="main-nav">
       <ul class="box-list open-law-list" id="selector" ng-controller="selector">
-        <li class="box open select-knesset">
+        <li class="box select-knesset">
           <header class="fc box-header"><h2 class="title">{{"Select Knesset" | translate}}</h2></header>
           <div class="content">
             <ul class="">
               <li ng-repeat="knesset in knessetList">
-                <a class="select-link" href="/booklet/knesset/{{knesset}}">Knesset {{knesset}}</a>
+                <a class="select-link" href="/booklet/knesset/{{knesset}}">{{"Knesset" | translate}} {{knesset}}</a>
               </li>
             </ul>
           </div>
         </li>
-        <li class="box select-year">
+        <li class="box open select-year">
           <header class="fc box-header"><h2 class="title">{{"Select Year" | translate}}</h2></header>
           <div class="content">
             <ul class="">

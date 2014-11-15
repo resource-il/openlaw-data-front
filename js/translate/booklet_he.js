@@ -8,9 +8,10 @@ var translations = {
     Dates: "תאריכים",
     Links: "קישורים",
     Origin: "נתונים מקוריים",
+    Published: "פורסם",
     booklet_data: {
         links: {
-            justice_pdf: "משרד המשפטים - קובץ PDF",
+            justice_pdf: "משרד המשפטים - קובץ PDF יחיד",
             justice_single_page: "משרד המשפטים - עמוד יחיד",
             knesset_single_page: "אתר הכנסת - עמוד יחיד"
         },
