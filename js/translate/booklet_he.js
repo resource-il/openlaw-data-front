@@ -9,6 +9,8 @@ var translations = {
     Links: "קישורים",
     Origin: "נתונים מקוריים",
     Published: "פורסם",
+    Title: "כותרת",
+    Subject: "נושא",
     booklet_data: {
         links: {
             justice_pdf: "משרד המשפטים - קובץ PDF יחיד",
