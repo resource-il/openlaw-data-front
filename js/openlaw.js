@@ -1,24 +1,33 @@
-var openLawApp = angular.module('openLaw', ['ngRoute'])
-    .directive('boxHeader', function () {
+var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale"])
+    .directive("boxHeader", function () {
         return {
             link: function ($scope, $element) {
                 $element.on("click", function ($event) {
-                    $element.parents('.box').toggleClass('open');
+                    $element.parents(".box").toggleClass("open");
                 });
             },
-            restrict: 'C'
+            restrict: "C"
         };
     })
-    .directive('ngDump', function () {
+    .directive("ngDump", function () {
         return {
             link: function ($scope, $element) {
                 $element.html(JSON.stringify($scope.booklet, undefined, 2));
-                //console.log($scope);
             },
-            restrict: 'C'
+            restrict: "C"
         };
     })
-    .controller('selector', function ($scope) {
+    .directive("searchForm", function () {
+        return {
+            link: function ($scope, $element, $attrs) {
+                $element.on("submit", function ($event) {
+                    $event.preventDefault();
+                });
+            },
+            restrict: "A"
+        };
+    })
+    .controller("selector", function ($scope) {
         $scope.years = [];
         startYear = 2005;
         for (currentYear = startYear; currentYear <= new Date().getFullYear(); currentYear++) {
@@ -30,20 +39,23 @@ var openLawApp = angular.module('openLaw', ['ngRoute'])
             $scope.knessetList.push(currentKnesset);
         }
     })
-    .controller('bookletList', function ($scope, $routeParams, $http, $location) {
+    .controller("bookletList", function ($scope, $routeParams, $http, $location) {
         if ($routeParams.selector == undefined || $routeParams.selection == undefined) {
             return;
         }
 
-        angular.element('.select-link.selected').removeClass('selected');
-        angular.element('.select-link[href="' + $location.path() + '"]').addClass('selected');
+        angular.element(".select-link.selected").removeClass("selected");
+        angular.element('.select-link[href="' + $location.path() + '"]').addClass("selected");
 
-        url = 'http://law.resource.org.il/v0/booklet/:selector/:selection?callback=JSON_CALLBACK'
-            .replace(':selector', $routeParams.selector)
-            .replace(':selection', $routeParams.selection);
+        url = "http://law.resource.org.il/v0/booklet/:selector/:selection?callback=JSON_CALLBACK"
+            .replace(":selector", $routeParams.selector)
+            .replace(":selection", $routeParams.selection);
         $http.jsonp(url).success(function (data) {
             $scope.booklets = data.response;
         });
+    })
+    .controller("search", function ($scope, $routeParams, $http) {
+
     });
 
 openLawApp.config(function ($routeProvider, $locationProvider) {
@@ -51,10 +63,14 @@ openLawApp.config(function ($routeProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     $routeProvider
         .when("/booklet/:selector/:selection", {
-            templateUrl: 'partials/booklet-list.html',
-            controller: 'bookletList'
+            templateUrl: "partials/booklet-list.html",
+            controller: "bookletList"
+        })
+        .when("/booklet/search", {
+            template: "",
+            controller: "search"
         })
         .otherwise({
-            redirectTo: '/booklet/year/' + new Date().getFullYear()
+            redirectTo: "/booklet/year/" + new Date().getFullYear()
         });
 });

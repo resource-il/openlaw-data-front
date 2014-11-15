@@ -28,8 +28,8 @@
     <h1>Open Law - Data</h1>
 
     <div id="free-search">
-      <form action="" method="post">
-        <input type="text" name="query" id="free-query">
+      <form action="/booklet/search" method="get" search-form>
+        <input type="text" name="q" id="free-query" ng-model="q" placeholder="Search">
         <input type="submit" value="Search">
       </form>
     </div>
@@ -38,7 +38,7 @@
     <nav class="main-nav">
       <ul class="box-list open-law-list" id="selector" ng-controller="selector">
         <li class="box open select-knesset">
-          <header class="box-header"><h2 class="title">Select Knesset</h2></header>
+          <header class="fc box-header"><h2 class="title">Select Knesset</h2></header>
           <div class="content">
             <ul class="">
               <li ng-repeat="knesset in knessetList">
@@ -48,7 +48,7 @@
           </div>
         </li>
         <li class="box select-year">
-          <header class="box-header"><h2 class="title">Select Year</h2></header>
+          <header class="fc box-header"><h2 class="title">Select Year</h2></header>
           <div class="content">
             <ul class="">
               <li ng-repeat="year in years">
@@ -68,8 +68,9 @@
   </div>
 </div>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/angularjs/angular.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-i18n/angular-locale_he-il.js"></script>
 <script src="js/openlaw.js"></script>
 </body>
 </html>
