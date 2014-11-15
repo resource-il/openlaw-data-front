@@ -11,23 +11,30 @@
       <div class="content">
         <dl>
 
-          <dt>Booklet:</dt>
+          <dt>{{"Booklet" | translate}}:</dt>
           <dd>{{booklet.booklet}}</dd>
 
-          <dt>Knesset:</dt>
+          <dt>{{"Knesset" | translate}}:</dt>
           <dd>{{booklet.knesset}}</dd>
 
-          <dt>Links:</dt>
+          <dt>{{"Links" | translate}}:</dt>
           <dd>
             <ul>
-              <li ng-repeat="(source, link) in booklet.links">{{source}}: <a href="{{link}}" target="_blank">{{link}}</a></li>
+              <li ng-repeat="(source, link) in booklet.links">{{"booklet_data.links." + source | translate}}: <a href="{{link}}" target="_blank">{{link}}</a></li>
             </ul>
           </dd>
 
-          <dt ng-if="booklet.dates">Dates:</dt>
-          <dd>
+          <dt ng-if="booklet.dates">{{"Dates" | translate}}:</dt>
+          <dd ng-if="booklet.dates">
             <ul>
-              <li ng-repeat="(desc, date) in booklet.dates">{{desc}}: <time datetime="{{date}}">{{date}}</time></li>
+              <li ng-repeat="(desc, date) in booklet.dates">{{"booklet_data.dates." + desc | translate}}: <time datetime="{{date}}">{{date}}</time></li>
+            </ul>
+          </dd>
+
+          <dt ng-if="booklet.origin">{{"Origin" | translate}}:</dt>
+          <dd ng-if="booklet.origin">
+            <ul>
+              <li ng-repeat="(desc, content) in booklet.origin">{{"booklet_data.origin." + desc | translate}} <pre class="json-content">{{content}}</pre></li>
             </ul>
           </dd>
 

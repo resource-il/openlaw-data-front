@@ -1,4 +1,4 @@
-var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale"])
+var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht.translate"])
     .directive("boxHeader", function () {
         return {
             link: function ($scope, $element) {
@@ -27,7 +27,7 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale"])
             restrict: "A"
         };
     })
-    .controller("selector", function ($scope) {
+    .controller("selector", function ($scope, $translate) {
         $scope.years = [];
         startYear = 2005;
         for (currentYear = startYear; currentYear <= new Date().getFullYear(); currentYear++) {
@@ -58,7 +58,7 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale"])
 
     });
 
-openLawApp.config(function ($routeProvider, $locationProvider) {
+openLawApp.config(function ($routeProvider, $locationProvider, $translateProvider) {
     // Configure existing providers
     $locationProvider.html5Mode(true);
     $routeProvider
@@ -73,4 +73,7 @@ openLawApp.config(function ($routeProvider, $locationProvider) {
         .otherwise({
             redirectTo: "/booklet/year/" + new Date().getFullYear()
         });
+    $translateProvider
+        .translations("he", translations)
+        .preferredLanguage("he");
 });
