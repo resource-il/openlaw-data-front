@@ -1,7 +1,7 @@
 <ul class="">
   <li ng-repeat="booklet in booklets" class="box">
     <article id="content_{{booklet.booklet}}" class="">
-      <header class="box-header">
+      <header class="fc box-header">
         <h3 class="title">{{booklet.booklet}}</h3>
         <footer ng-if="booklet.dates.published" class="header-footer published">
           Published
@@ -21,6 +21,13 @@
           <dd>
             <ul>
               <li ng-repeat="(source, link) in booklet.links">{{source}}: <a href="{{link}}" target="_blank">{{link}}</a></li>
+            </ul>
+          </dd>
+
+          <dt ng-if="booklet.dates">Dates:</dt>
+          <dd>
+            <ul>
+              <li ng-repeat="(desc, date) in booklet.dates">{{desc}}: <time datetime="{{date}}">{{date}}</time></li>
             </ul>
           </dd>
 
