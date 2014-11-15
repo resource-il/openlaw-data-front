@@ -41,8 +41,12 @@
         </dl>
         <!--<div class="ng-dump-wrapper">-->
           <!--<p>Dump: </p>-->
-          <!--<pre class="ng-dump"></pre>-->
+          <!--<pre class="ng-dump" data-dump="booklet"></pre>-->
         <!--</div>-->
+        <div class="more-info box" ng-controller="moreInfo" data-booklet-id="{{booklet.booklet}}">
+          <header class="box-header">{{"More info" | translate}}</header>
+          <div ng-if="parts" class="content more-info-content">CONTENT</div>
+        </div>
       </div>
     </article>
   </li>

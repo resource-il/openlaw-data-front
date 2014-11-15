@@ -1,0 +1,26 @@
+<ul>
+  <li ng-repeat="part in parts">
+    <dl>
+      <!-- Title -->
+      <dt>{{"Title" | translate}}</dt>
+      <dd>{{part.origin.knesset_title}}</dd>
+      <!-- Part -->
+      <dt>{{"Part" | translate}}</dt>
+      <dd>{{part.origin.knesset_part}}</dd>
+      <!-- Links -->
+      <dt>{{"Links" | translate}}</dt>
+      <dd>
+        <ul>
+          <li ng-repeat="(source, link) in part.links">
+            {{"part_data.links." + source | translate}}: <a href="{{link}}" target="_blank">{{link}}</a>
+          </li>
+        </ul>
+      </dd>
+    </dl>
+  </li>
+</ul>
+
+<!--<div class="ng-dump-wrapper">-->
+<!--<p>Dump: </p>-->
+<!--<pre class="ng-dump" data-dump="parts"></pre>-->
+<!--</div>-->

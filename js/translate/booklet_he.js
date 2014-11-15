@@ -21,5 +21,11 @@ var translations = {
         origin: {
             justice_description: "משרד המשפטים - תיאור"
         }
+    },
+    "More info": "מידע נוסף",
+    part_data: {
+        links: {
+            knesset_pdf: "אתר הכנסת - קובץ PDF נפרד"
+        }
     }
 };

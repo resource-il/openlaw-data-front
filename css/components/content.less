@@ -1,1 +1,12 @@
 .ng-dump-wrapper {direction:ltr; text-align:left;}
+
+.more-info {
+  @sep-width-border:1px;
+  header {background-color:@gray-w; color:@black; font-size:12rem; line-height:14rem;}
+  header:before {content: "+"; display:inline-block; padding: 0 3px; background-color:@black; color:@white; font-family:monospace; margin-left:5px;}
+  .content {display:none; border: @sep-width-border solid @gray-w; padding: 4px;}
+  &.open {
+    header:before {content:"-";}
+    .content {display:block;}
+  }
+}

@@ -3,7 +3,7 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
         return {
             link: function ($scope, $element) {
                 $element.on("click", function ($event) {
-                    $element.parents(".box").toggleClass("open");
+                    angular.element($element.parents(".box")[0]).toggleClass("open");
                 });
             },
             restrict: "C"
@@ -11,8 +11,10 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
     })
     .directive("ngDump", function () {
         return {
-            link: function ($scope, $element) {
-                $element.html(JSON.stringify($scope.booklet, undefined, 2));
+            link: function ($scope, $element, $attrs) {
+                console.log("attrs", $attrs);
+                console.log("scope", $scope);
+                $element.html(JSON.stringify($scope[$attrs.dump], undefined, 2));
             },
             restrict: "C"
         };
@@ -25,6 +27,46 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
                 });
             },
             restrict: "A"
+        };
+    })
+    .directive("moreInfo", function () {
+        return {
+            link: function ($scope, $element, $attrs) {
+                //console.log($attrs);
+                angular.element("> .box-header", $element).bind("click", function ($event) {
+                    $content = angular.element("> .content", $element);
+                    if (!$element.hasClass("open")) {
+                        return;
+                    }
+                    $scope.$apply("loadMoreInfo("+$attrs.bookletId+")");
+                });
+            },
+            restrict: "C"
+        };
+    })
+    .directive("moreInfoContent", function () {
+        return {
+            link: function ($scope, $element, $attrs) {
+
+            },
+            templateUrl: "partials/booklet-parts.html",
+            restrict: "C"
+        };
+    })
+    .controller("moreInfo", function ($scope, $http) {
+        $scope.parts = null;
+        $scope.loadMoreInfo = function($bookletId) {
+            if ($scope.parts) {
+                return;
+            }
+            url = "http://law.resource.org.il/v0/booklet/:bookletId?part=1&callback=JSON_CALLBACK"
+                .replace(":bookletId", $bookletId);
+            $http.jsonp(url).success(function (data) {
+                if (data.error.length) {
+                    return;
+                }
+                $scope.parts = data.response.parts || [];
+            });
         };
     })
     .controller("selector", function ($scope, $translate) {
