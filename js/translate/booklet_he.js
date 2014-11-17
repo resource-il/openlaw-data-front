@@ -29,5 +29,8 @@ var translations = {
         links: {
             knesset_pdf: "אתר הכנסת - קובץ PDF נפרד"
         }
-    }
+    },
+    Close: "סגור",
+    Resize: "שנה גודל",
+    Minimize: "מזער"
 };

@@ -53,6 +53,39 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
             restrict: "C"
         };
     })
+    .directive("modalWindow", function () {
+        return {
+            link: function ($scope, $element, $attrs) {
+                angular.element("a.close", $element).on("click", function($event) {
+                    $element.remove();
+                });
+                angular.element("a.resize", $element).on("click", function($event) {
+                    if ($element.attr("data-fullscreen") != "true") {
+                        $element.attr("data-fullscreen", "true");
+                    } else {
+                        $element.attr("data-fullscreen", "false");
+                    }
+                });
+                angular.element("a.minimize", $element).on("click", function($event) {
+                    $element.addClass("hide");
+                });
+            },
+            templateUrl: "partials/modal.html",
+            restrict: "C"
+        };
+    })
+    .directive("externalContent", function () {
+        return {
+            link: function ($scope, $element, $attrs) {
+                $element.on("click", function ($event) {
+                    $event.preventDefault();
+                    console.log($element.attr("href"));
+                });
+            },
+            controller: "windowManager",
+            restrict: "C"
+        };
+    })
     .controller("moreInfo", function ($scope, $http) {
         $scope.parts = null;
         $scope.loadMoreInfo = function($bookletId) {
@@ -98,6 +131,11 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
     })
     .controller("search", function ($scope, $routeParams, $http) {
 
+    })
+    .controller("windowManager", function ($scope) {
+        $scope.newWindow = function(url, fullscreen) {
+
+        };
     });
 
 openLawApp.config(function ($routeProvider, $locationProvider, $translateProvider) {
@@ -109,7 +147,7 @@ openLawApp.config(function ($routeProvider, $locationProvider, $translateProvide
             controller: "bookletList"
         })
         .when("/booklet/search", {
-            template: "",
+            template: "partials/booklet-list.html",
             controller: "search"
         })
         .otherwise({

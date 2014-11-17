@@ -19,7 +19,7 @@
           <dt>{{"Links" | translate}}:</dt>
           <dd>
             <ul>
-              <li ng-repeat="(source, link) in booklet.links">{{"booklet_data.links." + source | translate}}: <a href="{{link}}" target="_blank">{{link}}</a></li>
+              <li ng-repeat="(source, link) in booklet.links">{{"booklet_data.links." + source | translate}}: <a href="{{link}}" class="external-content" target="_blank">{{link}}</a></li>
             </ul>
           </dd>
 
@@ -44,7 +44,7 @@
         <!--</div>-->
         <div class="more-info box" ng-controller="moreInfo" data-booklet-id="{{booklet.booklet}}">
           <header class="box-header">{{"More info" | translate}}</header>
-          <div ng-if="parts" class="content more-info-content">CONTENT</div>
+          <div ng-if="parts" class="content more-info-content"></div>
         </div>
       </div>
     </article>
