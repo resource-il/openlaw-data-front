@@ -1,12 +1,26 @@
 .ng-dump-wrapper {direction:ltr; text-align:left;}
 
-.more-info {
-  @sep-width-border:1px;
-  header {background-color:@gray-w; color:@black; font-size:12rem; line-height:14rem;}
-  header:before {content: "+"; display:inline-block; padding: 0 3px; background-color:@black; color:@white; font-family:monospace; margin-left:5px;}
-  .content {display:none; border: @sep-width-border solid @gray-w; padding: 4px;}
-  &.open {
-    header:before {content:"-";}
-    .content {display:block;}
+.mixed-content{
+  /***common content styles***/
+  a{
+    text-decoration:underline; color:#00004c;
+    &:visited{color:#900090;}
+  }
+  dl{
+    margin-top:0;
+    dt ~ dt{margin-top:15px;}
+    dt{font-weight:bold; font-size:16px;}
+    dd{margin-right:25px;}
+  }
+  .more-info{
+    @sep-width-border:1px;
+    header {background-color:@gray-w; color:@black; font-size:12rem; line-height:14rem;}
+    header:before {content: "+"; display:inline-block; padding: 0 3px; background-color:@black; color:@white; font-family:monospace; margin-left:5px;}
+    .content {display:none; border: @sep-width-border solid @gray-w;}
+    &.open {
+      header:before {content:"-";}
+      .content {display:block;}
+    }
   }
 }
+
