@@ -1,0 +1,27 @@
+.modal-wrapper{
+  background-color:rgba(0,0,0,0.7);
+  position:fixed; z-index:5; left:0; right:0; top:0; bottom:0;
+}
+.modal-window{
+  width:70%; height:70%;
+  position:absolute;
+  left:50%; top:50%;
+  .transform(translateX(-50%) translateY(-50%));
+  overflow:auto;
+  z-index:2;
+
+  box-shadow:0 0 5px 4px rgba(20,20,20,0.6);
+  header{
+    background-color:@dark-navy; color:@white; padding:10px;
+    h4{float:right;}
+    footer{float:left;}
+  }
+  .content{
+    border:none; background-color:@white;
+    position:absolute; right:1px; left:0; bottom:0; top:39px;
+    width:calc(~"100% - 1px"); height:calc(~"100% - 39px");
+    padding: 5px 10px;
+  }
+
+  &[data-fullscreen="true"]{left:0; top:0; right:0; bottom:0; .transform(none); width:auto; height:auto; }
+}

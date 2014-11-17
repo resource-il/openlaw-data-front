@@ -64,7 +64,49 @@
         <!-- This content comes from booklet-list.html -->
         <div ng-view></div>
       </div>
+      <div ng-controller="windowManager" class="window-manager">
+        <div class="modal-window hide">
+          <header class="fc">
+            <h4>Some title</h4>
+            <footer>
+              <a href="#">Close</a>
+              <a href="#" class="minimize">Minimize</a>
+              <a href="#">Move</a>
+            </footer>
+          </header>
+          <div class="content">
+            Some content<br/>
+            and more
+          </div>
+        </div>
+        <div class="modal-window hide" data-fullscreen="true">
+          <header class="fc">
+            <h4>With iframe</h4>
+            <footer>
+              <a href="#">Close</a>
+              <a href="#">Minimize</a>
+              <a href="#">Move</a>
+            </footer>
+          </header>
+          <iframe class="content" src="http://old.justice.gov.il/MOJHeb/Reshumot/Hukim/2006/2048.htm"></iframe>
+        </div>
+      </div>
     </main>
+  </div>
+
+  <div class="modal-wrapper hide">
+    <div class="modal-window">
+      <header class="fc">
+        <h4>Some title</h4>
+        <footer>
+          <a href="#">Close</a>
+        </footer>
+      </header>
+      <div class="content">
+        Some content<br/>
+        and more
+      </div>
+    </div>
   </div>
 </div>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
