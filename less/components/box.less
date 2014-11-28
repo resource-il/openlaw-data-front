@@ -3,10 +3,10 @@
 }
 
 .box{
-  display:flex; flex-direction:column; filter:drop-shadow(0px 0px 5px @gray-w); background-color:@white; .prevent-select();
+  display:flex; flex-direction:column; filter:drop-shadow(0px 0px 5px @gray-w); background-color:@white;
   + .box{margin-top:10px;}
   header{
-    flex-shrink:0; background-color:@header-bg-color; color:@white; font-weight:bold; font-size:11rem; padding:5px; cursor:pointer; line-height:20rem;
+    flex-shrink:0; background-color:@header-bg-color; color:@white; font-weight:bold; font-size:11rem; padding:5px; cursor:pointer; line-height:20rem; .prevent-select();
     .title{float:right; margin-left:10px; font-size:14rem;}
     .header-footer{font-size:12rem; font-style:italic;}
     a{display:block;}
