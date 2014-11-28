@@ -115,18 +115,28 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
         }
     })
     .controller("bookletList", function ($scope, $routeParams, $http, $location) {
-        if ($routeParams.selector == undefined || $routeParams.selection == undefined) {
+        if (
+            ($routeParams.selector == undefined || $routeParams.selection == undefined)
+            && ($routeParams.booklet == undefined)
+        ) {
             return;
         }
 
-        angular.element(".select-link.selected").removeClass("selected");
-        angular.element('.select-link[href="' + $location.path() + '"]').addClass("selected");
+        $bySelection = $routeParams.selector != undefined && $routeParams.selection != undefined;
+        $byBooklet   = $routeParams.booklet != undefined;
 
-        url = "http://law.resource.org.il/v0/booklet/:selector/:selection?callback=JSON_CALLBACK"
-            .replace(":selector", $routeParams.selector)
-            .replace(":selection", $routeParams.selection);
+        angular.element(".select-link.selected").removeClass("selected");
+        if ($bySelection) {
+            angular.element('.select-link[href="' + $location.path() + '"]').addClass("selected");
+            url = "http://law.resource.org.il/v0/booklet/:selector/:selection?callback=JSON_CALLBACK"
+                .replace(":selector", $routeParams.selector)
+                .replace(":selection", $routeParams.selection);
+        } else if ($byBooklet) {
+            url = "http://law.resource.org.il/v0/booklet/:booklet?callback=JSON_CALLBACK"
+                .replace(":booklet", $routeParams.booklet);
+        }
         $http.jsonp(url).success(function (data) {
-            $scope.booklets = data.response;
+            $scope.booklets = Array.isArray(data.response) ? data.response : [data.response];
         });
     })
     .controller("search", function ($scope, $routeParams, $http) {
@@ -143,6 +153,10 @@ openLawApp.config(function ($routeProvider, $locationProvider, $translateProvide
     $locationProvider.html5Mode(true);
     $routeProvider
         .when("/booklet/:selector/:selection", {
+            templateUrl: "partials/booklet-list.html",
+            controller: "bookletList"
+        })
+        .when("/booklet/:booklet",{
             templateUrl: "partials/booklet-list.html",
             controller: "bookletList"
         })
