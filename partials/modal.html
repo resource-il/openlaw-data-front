@@ -1,12 +1,12 @@
-<div class="modal-window{{isMinimized ? ' hide' : ''}}" data-fullscreen="{{isFullscreen ? 'true' : ''}}">
+<div class="modal-window{{window.isMinimized ? ' hide' : ''}}" data-fullscreen="{{window.isFullscreen ? 'true' : ''}}">
   <header class="fc">
-    <h4>{{header}}</h4>
+    <h4>{{window.header}}</h4>
     <footer>
       <a href="#" class="close">{{"Close" | translate}}</a>
-      <a ng-if="isResizable" href="#" class="resize">{{"Resize" | translate}}</a>
-      <a ng-if="isMinimizable" href="#" class="minimize">{{"Minimize" | translate}}</a>
+      <a href="#" class="resize hide">{{"Resize" | translate}}</a>
+      <a href="#" class="minimize hide">{{"Minimize" | translate}}</a>
     </footer>
   </header>
-  <iframe ng-if="isIframe" class="content" src="{{content}}"></iframe>
-  <div ng-if="!isIframe" class="content">{{content}}</div>
+  <iframe ng-if="window.isIframe" class="content" src="{{window.content}}"></iframe>
+  <div ng-if="!window.isIframe" class="content">{{window.content}}</div>
 </div>

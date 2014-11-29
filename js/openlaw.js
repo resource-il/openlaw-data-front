@@ -26,13 +26,12 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
                     $event.preventDefault();
                 });
             },
-            restrict: "A"
+            restrict: "C"
         };
     })
     .directive("moreInfo", function () {
         return {
             link: function ($scope, $element, $attrs) {
-                //console.log($attrs);
                 angular.element("> .box-header", $element).bind("click", function ($event) {
                     $content = angular.element("> .content", $element);
                     if (!$element.hasClass("open")) {
@@ -53,13 +52,23 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
             restrict: "C"
         };
     })
-    .directive("modalWindow", function () {
+    .directive("modalWindow", function ($rootScope) {
         return {
             link: function ($scope, $element, $attrs) {
+                if ($scope.window.isResizable) {
+                    angular.element("a.resize", $element).removeClass("hide");
+                }
+                if ($scope.window.isMinimizable) {
+                    angular.element("a.minimize", $element).removeClass("hide");
+                }
+
                 angular.element("a.close", $element).on("click", function($event) {
-                    $element.remove();
+                    $rootScope.$emit("externalContent.close", angular.element("iframe", $element).attr("src"));
+                    $element.parent().remove();
                 });
                 angular.element("a.resize", $element).on("click", function($event) {
+                    console.log("Attrs:", $attrs);
+                    console.log("Element:", $element);
                     if ($element.attr("data-fullscreen") != "true") {
                         $element.attr("data-fullscreen", "true");
                     } else {
@@ -70,7 +79,16 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
                     $element.addClass("hide");
                 });
             },
+            restrict: "C"
+        };
+    })
+    .directive("windowItem", function () {
+        return {
+            link: function ($scope, $element, $attrs) {
+
+            },
             templateUrl: "partials/modal.html",
+            transclude: true,
             restrict: "C"
         };
     })
@@ -79,10 +97,11 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
             link: function ($scope, $element, $attrs) {
                 $element.on("click", function ($event) {
                     $event.preventDefault();
-                    console.log($element.attr("href"));
+                    $url = $element.attr("href");
+                    $scope.$apply("newWindow('" + $url + "')");
                 });
             },
-            controller: "windowManager",
+            controller: "externalContent",
             restrict: "C"
         };
     })
@@ -142,10 +161,26 @@ var openLawApp = angular.module("openLaw", ["ngRoute", "ngLocale", "pascalprecht
     .controller("search", function ($scope, $routeParams, $http) {
 
     })
-    .controller("windowManager", function ($scope) {
+    .controller("externalContent", function ($scope, $rootScope) {
         $scope.newWindow = function(url, fullscreen) {
-
+            $rootScope.$emit("externalContent.open", url, fullscreen);
         };
+    })
+    .controller("windowManager", function ($scope, $rootScope, $sce) {
+        $scope.windows = {};
+        var opener = $rootScope.$on("externalContent.open", function (event, url, fullscreen) {
+            $scope.windows[url] = {
+                isResizable: true,
+                isMinimizable: true,
+                isIframe: true,
+                content: $sce.trustAsResourceUrl(url),
+                header: "Some title"
+            };
+        });
+        var closer = $rootScope.$on("externalContent.close", function (event, url) {
+            delete $scope.windows[url];
+        });
+        $scope.$on("$destroy", opener);
     });
 
 openLawApp.config(function ($routeProvider, $locationProvider, $translateProvider) {

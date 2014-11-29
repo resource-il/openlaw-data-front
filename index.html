@@ -29,7 +29,7 @@
     <h1>{{"OpenLaw project - data warehouse" | translate}}</h1>
 
     <div ng-if="search.enabled" id="free-search">
-      <form action="/booklet/search" method="get" search-form>
+      <form action="/booklet/search" method="get" class="search-form">
         <input type="text" name="q" id="free-query" ng-model="q" placeholder="{{'Search' | translate}}">
         <button type="submit">{{"Search" | translate}}</button>
       </form>
@@ -65,7 +65,9 @@
         <!-- This content comes from booklet-list.html -->
         <div ng-view></div>
       </div>
-      <div ng-controller="windowManager" class="window-manager"></div>
+      <div ng-controller="windowManager" class="window-manager">
+        <div class="window-item" ng-repeat="window in windows"></div>
+      </div>
     </main>
   </div>
 
